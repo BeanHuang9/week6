@@ -29,7 +29,7 @@
       <button type="button" class="btn btn-primary">
         結帳
         <span class="badge rounded-pill bg-danger">
-          {{ cartData.carts.length }}
+          {{ filterCartLen }}
         </span>
       </button>
     </div>
@@ -58,10 +58,19 @@ export default {
         });
     },
   },
+  computed: {
+    filterCartLen() {
+      let len = 0;
+      this.cartData.carts.forEach((item) => {
+        len += item.qty;
+      });
+      return len;
+    },
+  },
   mounted() {
     this.getCart();
-    emitter.on("get-cart", (data) => {
-      this.carts = data;
+    emitter.on("get-cart", () => {
+      this.getCart();
     });
   },
 };

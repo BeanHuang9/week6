@@ -104,17 +104,7 @@ export default {
         )
         .then((res) => {
           console.log(res);
-          this.getCart();
-        });
-    },
-    getCart() {
-      this.$http
-        .get(`${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/cart`)
-        .then((res) => {
-          console.log("cart:", res);
-          this.cartData = res.data.data;
-          emitter.emit("get-cart", res.data.data);
-          this.isLoadingItem = "";
+          emitter.emit("get-cart");
         });
     },
   },
